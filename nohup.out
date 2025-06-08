@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/faster-whisper/worker.py", line 3, in <module>
+    from transcriber import download_video, extract_audio, run_transcription
+ModuleNotFoundError: No module named 'transcriber'
+Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+DEBUG: CWD: /workspace/faster-whisper
+DEBUG: files in cwd: ['.git', '.github', 'benchmark', 'build', 'docker', 'downloads', 'faster_whisper.egg-info', 'faster_whisper', 'tests', '.gitignore', 'CONTRIBUTING.md', 'LICENSE', 'MANIFEST.in', 'README.md', 'app.py', 'jfk.flac', 'job_queue.py', 'nohup.out', 'requirements.conversion.txt', 'requirements.txt', 'setup.cfg', 'setup.py', 'test.py', 'worker.py', 'gunicorn-error.log', 'gunicorn-access.log', 'mytranscriber.py']
+DEBUG: sys.path: ['/workspace/faster-whisper', '/usr/lib/python312.zip', '/usr/lib/python3.12', '/usr/lib/python3.12/lib-dynload', '/venv/main/lib/python3.12/site-packages', '/workspace/faster-whisper']
