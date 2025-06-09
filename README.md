@@ -15,9 +15,14 @@ redis-server --daemonize yes  #corriendo en background
 
 El nohup se usa de maenera rapida para dejar corriendo servicios en background como demonios
 ## Inicializa el worker
+poetry run celery -A celery_app.celery_app worker --concurrency=4
+### en background
 nohup poetry run celery -A celery_app.celery_app worker --concurrency=4 --loglevel=info > celery.log 2>&1 &
+
 ## Inicializa el GUI para ver el redis o las colas
 nohup poetry run celery -A celery_app.celery_app flower --concurrency=4 --loglevel=info > celery.log 2>&1 &
+### en background
+poetry run celery -A celery_app.celery_app flower
 
 en el celerity.log se puede ver lo último que ha pasado con til celery.log
 

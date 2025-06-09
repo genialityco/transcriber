@@ -1,5 +1,5 @@
 import multiprocessing
-#multiprocessing.set_start_method('spawn', force=True)  # Set before anything else
+multiprocessing.set_start_method('spawn', force=True)  # Set before anything else
 import os
 import uuid
 import subprocess
@@ -37,9 +37,6 @@ def run_ffmpeg(video_path, audio_path):
     env["OBJC_DISABLE_INITIALIZE_FORK_SAFETY"] = "YES"
     subprocess.run(
         ["ffmpeg", "-y", "-i", video_path, "-ar", "16000", "-ac", "1", audio_path],
-        env=env,
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL,
         check=True,
     )
 def extract_audio(video_path):
@@ -47,15 +44,12 @@ def extract_audio(video_path):
     env = os.environ.copy()
     result = subprocess.run(
         ["poetry", "run", "python", "convert_audio.py", video_path],
-        env=env,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        text=True,
         check=True,
     )
     return audio_path
 
 def run_transcription(audio_path):
+    print("inicindo transcripcion")
     segments, info = whisper_model.transcribe(audio_path)
     result = []
     for s in segments:
@@ -81,6 +75,7 @@ def process_job(vimeo_url, activity_id):
         # )
         # self.update_state(state="PROGRESS")
         video_path = download_video(vimeo_url)
+        print("procesando audio")
         # self.update_state(
         #     state='PROGRESS',
         #     meta={'current': 'video downloaded'}
@@ -88,13 +83,16 @@ def process_job(vimeo_url, activity_id):
         # self.update_state(state="DONE")
                 
         audio_path = extract_audio(video_path)
+        print("audio terminado")
         # self.update_state(state="TERMINI")
         # return {'status': 'done'}
         segments = run_transcription(audio_path)
         # # POST al backend NestJS
+        print("transcripcion  terminada")
         BACKEND_URL = "https://gencampus-backend-w2ms4.ondigitalocean.app/transcript-segments"
         payload = {"segments": segments}
         r = requests.post(f"{BACKEND_URL}/{activity_id}", json=payload)
+        print("post terminado")
         print("NestJS response:", r.status_code, r.text)
         # return {'status': 'done'}
         return {"status": "done", "segments": len(segments)}
