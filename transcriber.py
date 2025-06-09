@@ -102,8 +102,8 @@ def process_job(vimeo_url, activity_id):
         print("ERROR processing job:", e)
         return {"status": "error", "error": str(e)}
     finally:
-        #if video_path and os.path.exists(video_path):
-            #os.remove(video_path)
+        if video_path and os.path.exists(video_path):
+            os.remove(video_path)
         if audio_path and os.path.exists(audio_path):
             os.remove(audio_path)
 
