@@ -90,14 +90,14 @@ def process_job(vimeo_url, activity_id):
         audio_path = extract_audio(video_path)
         # self.update_state(state="TERMINI")
         # return {'status': 'done'}
-        # segments = run_transcription(audio_path)
+        segments = run_transcription(audio_path)
         # # POST al backend NestJS
-        # BACKEND_URL = "https://gencampus-backend-w2ms4.ondigitalocean.app/transcript-segments"
-        # payload = {"segments": segments}
-        # r = requests.post(f"{BACKEND_URL}/{activity_id}", json=payload)
-        # print("NestJS response:", r.status_code, r.text)
-        return {'status': 'done'}
-        #return {"status": "done", "segments": len(segments)}
+        BACKEND_URL = "https://gencampus-backend-w2ms4.ondigitalocean.app/transcript-segments"
+        payload = {"segments": segments}
+        r = requests.post(f"{BACKEND_URL}/{activity_id}", json=payload)
+        print("NestJS response:", r.status_code, r.text)
+        # return {'status': 'done'}
+        return {"status": "done", "segments": len(segments)}
     except Exception as e:
         print("ERROR processing job:", e)
         return {"status": "error", "error": str(e)}

@@ -1,16 +1,34 @@
 [![CI](https://github.com/SYSTRAN/faster-whisper/workflows/CI/badge.svg)](https://github.com/SYSTRAN/faster-whisper/actions?query=workflow%3ACI) [![PyPI version](https://badge.fury.io/py/faster-whisper.svg)](https://badge.fury.io/py/faster-whisper)
 
 
-# transcription of videos by GENIALITY
+## transcription of videos by GENIALITY
+Instrucciones para correr el proyecto en un nuevo servidor
+pip install poetry
 
+# para instalar dependencias
+poetry install   
+
+# instalar redis
 sudo apt install redis-server -y
-redis-server
-redis-server --daemonize yes
+redis-server --daemonize yes  #corriendo en background
 
+
+El nohup se usa de maenera rapida para dejar corriendo servicios en background como demonios
+## Inicializa el worker
 nohup poetry run celery -A celery_app.celery_app worker --loglevel=info > celery.log 2>&1 &
+## Inicializa el GUI para ver el redis o las colas
 nohup poetry run celery -A celery_app.celery_app flower --loglevel=info > celery.log 2>&1 &
 
-celery -A tasks.celery_app worker --loglevel=info
+en el celerity.log se puede ver lo último que ha pasado con til celery.log
+
+# Por si se tienen problemas con el celery o cualquier comando en backgroup
+pkill -f celery
+
+## Para correr el servidor
+nohup poetry run python app.py
+
+
+## Este proyecto usa sobretodo la siguiente libreria
 
 # Faster Whisper transcription with CTranslate2
 
