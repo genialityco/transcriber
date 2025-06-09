@@ -1,5 +1,16 @@
 [![CI](https://github.com/SYSTRAN/faster-whisper/workflows/CI/badge.svg)](https://github.com/SYSTRAN/faster-whisper/actions?query=workflow%3ACI) [![PyPI version](https://badge.fury.io/py/faster-whisper.svg)](https://badge.fury.io/py/faster-whisper)
 
+
+# transcription of videos by GENIALITY
+
+sudo apt install redis-server -y
+redis-server
+redis-server --daemonize yes
+
+celery -A celery_app. worker --loglevel=info > celery.log 2>&1 &
+
+celery -A tasks.celery_app worker --loglevel=info
+
 # Faster Whisper transcription with CTranslate2
 
 **faster-whisper** is a reimplementation of OpenAI's Whisper model using [CTranslate2](https://github.com/OpenNMT/CTranslate2/), which is a fast inference engine for Transformer models.
