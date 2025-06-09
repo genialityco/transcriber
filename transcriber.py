@@ -62,8 +62,7 @@ def run_transcription(audio_path):
     return result
 
 
-@app.task(bind=True)
-def process_job(self, vimeo_url, activity_id):
+def process_job(vimeo_url, activity_id):
     video_path = None
     audio_path = None
     try:
@@ -71,21 +70,21 @@ def process_job(self, vimeo_url, activity_id):
         #job = get_current_job()
         #job.meta['progress'] = "downloading video"
         #job.save_meta()   
-        self.update_state(
-            state='PROGRESS',
-            meta={'current': 'downloading video'}
-        )
-        self.update_state(state="PROGRESS")
+        # self.update_state(
+        #     state='PROGRESS',
+        #     meta={'current': 'downloading video'}
+        # )
+        # self.update_state(state="PROGRESS")
         video_path = download_video(vimeo_url)
-        self.update_state(
-            state='PROGRESS',
-            meta={'current': 'video downloaded'}
-        )        
-        self.update_state(state="DONE")
+        # self.update_state(
+        #     state='PROGRESS',
+        #     meta={'current': 'video downloaded'}
+        # )        
+        # self.update_state(state="DONE")
                 
         audio_path = extract_audio(video_path)
-        self.update_state(state="TERMINI")
-        return {'status': 'done'}
+        # self.update_state(state="TERMINI")
+        # return {'status': 'done'}
         # segments = run_transcription(audio_path)
         # # POST al backend NestJS
         # BACKEND_URL = "https://gencampus-backend-w2ms4.ondigitalocean.app/transcript-segments"

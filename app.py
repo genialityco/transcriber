@@ -5,16 +5,6 @@ import subprocess
 import os
 import platform
 
-if platform.system() == "Darwin":  # macOS
-    from celery_tasks import transcribe
-
-    result = transcribe.delay("./example.mp4")
-    print("Celery task submitted:", result.id)
-else:
-    import redis
-    from rq import Queue
-    from tasks import rq_tasks
-
 app = Flask(__name__)
 
 redis_conn = Redis()
@@ -31,21 +21,21 @@ def enqueue():
         return jsonify({"error": "Missing vimeo_url or activity_id"}), 400
 
     taskid = 0
-    if platform.system() == "Darwin":  # macOS
-        from celery_tasks import extract_audio
+    #if platform.system() == "Darwin":  # macOS
+    from celery_tasks import transcribe
 
-        result = transcribe.delay(vimeo_url, activity_id)
-        print("Celery task submitted:", result.id)
-        taskid = result.id
-    else:
-        import redis
-        from rq import Queue
-        from rq_tasks import transcribe_rq
+    result = transcribe.delay(vimeo_url, activity_id)
+    print("Celery task submitted:", result.id)
+    taskid = result.id
+    # else:
+    #     import redis
+    #     from rq import Queue
+    #     from rq_tasks import transcribe_rq
 
-        q = Queue(connection=redis.from_url("redis://localhost:6379/0"))
-        job = q.enqueue(transcribe_rq, vimeo_url, activity_id)
-        print("RQ job submitted:", job.id)
-        taskid = result.id
+    #     q = Queue(connection=redis.from_url("redis://localhost:6379/0"))
+    #     job = q.enqueue(transcribe_rq, vimeo_url, activity_id)
+    #     print("RQ job submitted:", job.id)
+    #     taskid = result.id
     # job = q.enqueue(process_job, vimeo_url, activity_id)
     # job.meta['progress'] = 'niguno'
     # job.save_meta()
