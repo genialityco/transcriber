@@ -4,6 +4,7 @@ from rq import Queue
 import subprocess
 import os
 import platform
+from celery_tasks import transcribe
 
 app = Flask(__name__)
 
@@ -25,7 +26,7 @@ def enqueue():
 
     taskid = 0
     #if platform.system() == "Darwin":  # macOS
-    from celery_tasks import transcribe
+    #from celery_tasks import transcribe
 
     result = transcribe.delay(vimeo_url, activity_id)
     print("Celery task submitted:", result.id)
