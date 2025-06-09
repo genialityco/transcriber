@@ -6,3 +6,25 @@ Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed.
 DEBUG: CWD: /workspace/faster-whisper
 DEBUG: files in cwd: ['.git', '.github', 'benchmark', 'build', 'docker', 'downloads', 'faster_whisper.egg-info', 'faster_whisper', 'tests', '.gitignore', 'CONTRIBUTING.md', 'LICENSE', 'MANIFEST.in', 'README.md', 'app.py', 'jfk.flac', 'job_queue.py', 'nohup.out', 'requirements.conversion.txt', 'requirements.txt', 'setup.cfg', 'setup.py', 'test.py', 'worker.py', 'gunicorn-error.log', 'gunicorn-access.log', 'mytranscriber.py']
 DEBUG: sys.path: ['/workspace/faster-whisper', '/usr/lib/python312.zip', '/usr/lib/python3.12', '/usr/lib/python3.12/lib-dynload', '/venv/main/lib/python3.12/site-packages', '/workspace/faster-whisper']
+Using GPU for transcription
+[I 250609 15:30:53 command:168] Visit me at http://0.0.0.0:5555
+[I 250609 15:30:53 command:176] Broker: redis://localhost:6379/0
+[I 250609 15:30:53 command:177] Registered tasks: 
+    ['celery.accumulate',
+     'celery.backend_cleanup',
+     'celery.chain',
+     'celery.chord',
+     'celery.chord_unlock',
+     'celery.chunks',
+     'celery.group',
+     'celery.map',
+     'celery.starmap']
+[I 250609 15:30:53 mixins:228] Connected to redis://localhost:6379/0
+[W 250609 15:30:54 inspector:44] Inspect method active failed
+[W 250609 15:30:54 inspector:44] Inspect method registered failed
+[W 250609 15:30:54 inspector:44] Inspect method stats failed
+[W 250609 15:30:54 inspector:44] Inspect method conf failed
+[W 250609 15:30:54 inspector:44] Inspect method scheduled failed
+[W 250609 15:30:54 inspector:44] Inspect method revoked failed
+[W 250609 15:30:54 inspector:44] Inspect method reserved failed
+[W 250609 15:30:54 inspector:44] Inspect method active_queues failed

@@ -10,6 +10,9 @@ app = Flask(__name__)
 redis_conn = Redis()
 q = Queue(connection=redis_conn)
 
+@app.route("/testi", methods=["GET"])
+def testi():
+    return "hola"
 
 @app.route("/enqueue", methods=["POST"])
 def enqueue():
