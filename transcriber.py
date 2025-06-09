@@ -8,8 +8,7 @@ import requests
 import time
 import threading
 import torch
-from celery_app import app
-from rq import get_current_job
+
 
 # Ajusta el modelo según tu GPU
 MODEL_SIZE = "tiny"
