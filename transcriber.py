@@ -18,6 +18,7 @@ device = "cpu"
 compute_type="int8"  # or "float16" for FP16
 # or run on GPU with FP16
 if torch.cuda.is_available():   
+    print ("Using GPU for transcription")
     device = "cuda"
     compute_type = "float16"  # Use FP16 for better performance on GPU
 #whisper_model = WhisperModel(MODEL_SIZE, device="cuda", compute_type="float16")
