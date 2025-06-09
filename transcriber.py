@@ -7,17 +7,22 @@ from faster_whisper import WhisperModel
 import requests
 import time
 import threading
+import torch
 from celery_app import app
 from rq import get_current_job
 
 # Ajusta el modelo según tu GPU
 MODEL_SIZE = "tiny"
 #MODEL_SIZE = "large-v3"
-
+device = "cpu"
+compute_type="int8"  # or "float16" for FP16
 # or run on GPU with FP16
+if torch.cuda.is_available():   
+    device = "cuda"
+    compute_type = "float16"  # Use FP16 for better performance on GPU
 #whisper_model = WhisperModel(MODEL_SIZE, device="cuda", compute_type="float16")
 # or run on CPU with INT8
-whisper_model = WhisperModel(MODEL_SIZE, device="cpu", compute_type="int8")
+whisper_model = WhisperModel(MODEL_SIZE, device=device, compute_type=compute_type)
 DOWNLOAD_FOLDER = "./downloads"
 os.makedirs(DOWNLOAD_FOLDER, exist_ok=True)
 
