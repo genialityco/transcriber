@@ -25,7 +25,7 @@ en el celerity.log se puede ver lo último que ha pasado con til celery.log
 pkill -f celery
 
 ## Para correr el servidor
-nohup poetry run python app.py
+nohup poetry run python app.py --loglevel=info > transapp.log 2>&1 &
 
 
 ## Este proyecto usa sobretodo la siguiente libreria
