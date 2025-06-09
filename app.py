@@ -25,9 +25,9 @@ def enqueue():
 
     taskid = 0
     #if platform.system() == "Darwin":  # macOS
-    from celery_tasks import celery_app
+    from celery_tasks import transcribe
 
-    result = celery_app.delay(vimeo_url, activity_id)
+    result = transcribe.delay(vimeo_url, activity_id)
     print("Celery task submitted:", result.id)
     taskid = result.id
     # else:
