@@ -7,7 +7,8 @@ sudo apt install redis-server -y
 redis-server
 redis-server --daemonize yes
 
-celery -A celery_app. worker --loglevel=info > celery.log 2>&1 &
+nohup poetry run celery -A celery_app.celery_app worker --loglevel=info > celery.log 2>&1 &
+nohup poetry run celery -A celery_app.celery_app flower --loglevel=info > celery.log 2>&1 &
 
 celery -A tasks.celery_app worker --loglevel=info
 
